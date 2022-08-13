@@ -43,6 +43,31 @@ Emoji.args = {
 `,
 };
 
+export const Mentions = Template.bind({});
+Mentions.args = {
+  mentionable: [
+    {
+      name: "mention",
+      id: "1",
+      title: "elonmusk",
+      attrs: { href: "https://twitter.com/elonmusk", "data-name": "elonmusk" },
+    },
+    {
+      name: "mention",
+      id: "2",
+      title: "jack",
+      attrs: { href: "https://twitter.com/jack", "data-name": "jack" },
+    },
+  ],
+  defaultValue: `# Mentions
+
+\
+@elon
+
+[jack](https://twitter.com/jack)
+`,
+};
+
 export const TemplateDoc = Template.bind({});
 TemplateDoc.args = {
   template: true,

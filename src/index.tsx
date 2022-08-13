@@ -77,6 +77,9 @@ import SmartText from "./plugins/SmartText";
 import TrailingNode from "./plugins/TrailingNode";
 import PasteHandler from "./plugins/PasteHandler";
 import { PluginSimple } from "markdown-it";
+import MentionTrigger from "./plugins/MentionTrigger";
+import MentionMenu, { Mentionable } from "./components/MentionMenu";
+import Mention from "./nodes/Mention";
 
 export { schema, parser, serializer, renderToHtml } from "./server";
 
@@ -120,6 +123,7 @@ export type Props = {
     | "tr"
     | "emoji"
   )[];
+  mentionable?: Mentionable[];
   autoFocus?: boolean;
   readOnly?: boolean;
   readOnlyWriteCheckboxes?: boolean;
@@ -163,6 +167,7 @@ type State = {
   linkMenuOpen: boolean;
   blockMenuSearch: string;
   emojiMenuOpen: boolean;
+  mentionMenuOpen: boolean;
 };
 
 type Step = {
@@ -196,6 +201,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     linkMenuOpen: false,
     blockMenuSearch: "",
     emojiMenuOpen: false,
+    mentionMenuOpen: false,
   };
 
   isBlurred: boolean;
@@ -394,6 +400,15 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
             },
             onClose: () => {
               this.setState({ emojiMenuOpen: false });
+            },
+          }),
+          new Mention(),
+          new MentionTrigger({
+            onOpen: (search: string) => {
+              this.setState({ mentionMenuOpen: true, blockMenuSearch: search });
+            },
+            onClose: () => {
+              this.setState({ mentionMenuOpen: false });
             },
           }),
           new Placeholder({
@@ -796,6 +811,18 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
                   search={this.state.blockMenuSearch}
                   onClose={() => this.setState({ emojiMenuOpen: false })}
                 />
+                {!!this.props.mentionable && (
+                  <MentionMenu
+                    view={this.view}
+                    commands={this.commands}
+                    dictionary={dictionary}
+                    rtl={isRTL}
+                    isActive={this.state.mentionMenuOpen}
+                    search={this.state.blockMenuSearch}
+                    onClose={() => this.setState({ mentionMenuOpen: false })}
+                    items={this.props.mentionable}
+                  />
+                )}
                 <BlockMenu
                   view={this.view}
                   commands={this.commands}
