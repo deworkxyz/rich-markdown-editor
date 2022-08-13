@@ -1,7 +1,4 @@
-import * as React from "react";
 import Node from "./Node";
-import embedsRule from "../rules/embeds";
-import { InputRule } from "prosemirror-inputrules";
 
 export default class Mention extends Node {
   get name() {
@@ -52,7 +49,11 @@ export default class Mention extends Node {
 
   toMarkdown(state, node) {
     state.write(
-      "[" + state.esc(node.attrs.href) + "](" + state.esc(node.attrs.href) + ")"
+      "[" +
+        state.esc(node.attrs["data-name"]) +
+        "](" +
+        state.esc(node.attrs.href) +
+        ")"
     );
   }
 

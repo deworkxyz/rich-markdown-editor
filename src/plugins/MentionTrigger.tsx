@@ -5,7 +5,6 @@ import isInCode from "../queries/isInCode";
 import { run } from "./BlockMenuTrigger";
 
 const OPEN_REGEX = /(^|\s)@([0-9a-zA-Z_+-]+)?$/;
-const CLOSE_REGEX = /(?:^|\s):(([0-9a-zA-Z_+-]*\s+)|(\s+[0-9a-zA-Z_+-]+)|[^0-9a-zA-Z_+-]+)$/;
 
 export default class MentionTrigger extends Extension {
   get name() {
