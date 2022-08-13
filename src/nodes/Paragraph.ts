@@ -33,7 +33,7 @@ export default class Paragraph extends Node {
       node.childCount === 0 &&
       !state.inTable
     ) {
-      state.write("\\\n");
+      state.write("\n");
     } else {
       state.renderInline(node);
       state.closeBlock(node);
