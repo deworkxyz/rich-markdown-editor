@@ -1,3 +1,4 @@
+import { EditorState } from "prosemirror-state";
 import Node from "./Node";
 
 export default class Mention extends Node {
@@ -40,9 +41,9 @@ export default class Mention extends Node {
         ? selection.$cursor.pos
         : selection.$to.pos;
       const node = type.create(attrs);
-      const transaction = state.tr.insert(position, node);
-
+      const transaction = state.tr.insert(position, node).insertText(" ");
       dispatch(transaction);
+
       return true;
     };
   }

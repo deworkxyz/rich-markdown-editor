@@ -50,13 +50,13 @@ Mentions.args = {
       name: "mention",
       id: "1",
       title: "elonmusk",
-      attrs: { href: "https://twitter.com/elonmusk", "data-name": "elonmusk" },
+      attrs: { href: "https://twitter.com/elonmusk", "data-name": "@elonmusk" },
     },
     {
       name: "mention",
       id: "2",
       title: "jack",
-      attrs: { href: "https://twitter.com/jack", "data-name": "jack" },
+      attrs: { href: "https://twitter.com/jack", "data-name": "@jack" },
     },
   ],
   defaultValue: `# Mentions
