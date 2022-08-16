@@ -21,7 +21,7 @@ class MentionMenu extends React.Component<
   get items(): Mentionable[] {
     const query = this.props.search?.toLowerCase() ?? "";
     const searcher = new FuzzySearch<Mentionable>(this.props.items, ["title"], {
-      caseSensitive: true,
+      caseSensitive: false,
       sort: true,
     });
 
